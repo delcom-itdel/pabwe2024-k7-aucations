@@ -108,11 +108,14 @@ const api = (() => {
   async function getAllAuctions() {
     const response = await _fetchWithAuth(`${BASE_URL}/aucations`);
     const responseJson = await response.json();
+    console.log("Response from API:", responseJson);
     if (!response.ok) {
       throw new Error(responseJson.message || "Failed to fetch auctions");
     }
 
-    return responseJson.data.auctions;
+    return responseJson.data && responseJson.data.aucations
+      ? responseJson.data.aucations
+      : [];
   }
 
   // API Todos => https://public-api.delcom.org/docs/1.0/api-todos

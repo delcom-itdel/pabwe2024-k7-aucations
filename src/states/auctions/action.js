@@ -50,8 +50,10 @@ function asyncGetAuctions() {
     dispatch(showLoading());
     try {
       const auctions = await api.getAllAuctions();
+      console.log("Auctions fetched from API:", auctions);
       dispatch(getAuctionsActionCreator(auctions));
     } catch (error) {
+      console.error("Error fetching auctions:", error);
       showErrorDialog(error.message);
     }
     dispatch(hideLoading());
