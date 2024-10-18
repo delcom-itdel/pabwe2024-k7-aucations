@@ -60,7 +60,10 @@ function asyncGetAuctions() {
   };
 }
 
-function asyncAddAuction({ title, description, start_bid, closed_at, cover }) {
+function asyncAddAuction(
+  { title, description, start_bid, closed_at, cover },
+  navigate
+) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
@@ -72,6 +75,7 @@ function asyncAddAuction({ title, description, start_bid, closed_at, cover }) {
         cover,
       });
       dispatch(addAuctionActionCreator(true));
+      navigate("/"); // Redirect to homepage after successful addition
     } catch (error) {
       showErrorDialog(error.message);
     }

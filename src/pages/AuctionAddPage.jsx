@@ -6,6 +6,7 @@ import {
 } from "../states/auctions/action"; // Import action untuk Auction
 import AuctionInput from "../components/AuctionInput"; // Input form untuk Auction
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2"; // Make sure you have this import for
 
 function AuctionAddPage() {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ function AuctionAddPage() {
         showConfirmButton: false,
         timer: 700,
       });
-      navigate("/");
       dispatch(addAuctionActionCreator(false)); // Reset status add auction
     }
   }, [isAddAuction, navigate, dispatch]);
@@ -35,8 +35,11 @@ function AuctionAddPage() {
     cover,
   }) => {
     dispatch(
-      asyncAddAuction({ title, description, start_bid, closed_at, cover })
-    ); // Dispatch action untuk menambahkan auction
+      asyncAddAuction(
+        { title, description, start_bid, closed_at, cover },
+        navigate
+      ) // Pass navigate to the action
+    );
   };
 
   return (
