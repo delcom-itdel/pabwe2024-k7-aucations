@@ -127,6 +127,15 @@ const api = (() => {
       : [];
   }
 
+  async function getDetailAuction(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/aucations/${id}`);
+    const responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message || "Failed to fetch todo detail");
+    }
+    return responseJson.data.todo;
+  }
+
   // API Todos
   async function postAddTodo({ title, description }) {
     const response = await _fetchWithAuth(`${BASE_URL}/todos`, {
@@ -221,6 +230,7 @@ const api = (() => {
     getMe,
     postAddAuction,
     getAllAuctions,
+    getDetailAuction,
     postChangePhotoProfile,
     postAddTodo,
     postChangeCoverTodo,

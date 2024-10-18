@@ -6,7 +6,7 @@ import {
 } from "../states/auctions/action"; // Import action untuk Auction
 import AuctionInput from "../components/AuctionInput"; // Input form untuk Auction
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2"; // Make sure you have this import for
+// import Swal from "sweetalert2"; // Make sure you have this import for
 
 function AuctionAddPage() {
   const navigate = useNavigate();

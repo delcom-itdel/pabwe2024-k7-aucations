@@ -1,10 +1,15 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom"; // Added import for Link
 
 function AuctionItem({ auction }) {
   return (
     <div className="card mb-3">
       <div className="card-body">
-        <h5>{auction.title}</h5>
+        <Link to={`/auction/${auction.id}`}>
+          {" "}
+          {/* Wrapped the auction title in a Link */}
+          <h5>{auction.title}</h5>
+        </Link>
         <p>{auction.description}</p>
         <p>Starting Bid: {auction.start_bid}</p>
         <p>Closing Date: {new Date(auction.closed_at).toLocaleDateString()}</p>
