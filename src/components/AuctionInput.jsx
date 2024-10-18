@@ -6,22 +6,32 @@ function AuctionInput({ onAddAuction }) {
   const [description, setDescription] = useState("");
   const [startBid, setStartBid] = useState("");
   const [closedAt, setClosedAt] = useState("");
+  const [cover, setCover] = useState(null); // Simpan file cover di state
 
+  // Handler untuk menambah auction
   function handleOnAddAuction(e) {
     e.preventDefault();
-    if (
-      title.trim() &&
-      description.trim() &&
-      startBid.trim() &&
-      closedAt.trim()
-    ) {
+
+    const fullClosedAt = `${closedAt} 23:59:59`; // Tambahkan waktu default ke closedAt
+
+    if (title.trim() && description.trim() && startBid && closedAt && cover) {
       onAddAuction({
         title,
         description,
         start_bid: startBid,
-        closed_at: closedAt,
+        closed_at: fullClosedAt,
+        cover, // Kirim file cover
       });
+    } else {
+      alert("Please fill in all fields, including the cover image.");
     }
+  }
+
+  // Handler untuk menangani perubahan file cover
+  function handleFileChange(e) {
+    const selectedFile = e.target.files[0]; // Ambil file dari input
+    setCover(selectedFile); // Simpan file ke state cover
+    console.log("File selected:", selectedFile); // Logging untuk debugging
   }
 
   return (
@@ -78,6 +88,19 @@ function AuctionInput({ onAddAuction }) {
               id="inputClosedAt"
               onChange={(e) => setClosedAt(e.target.value)}
               value={closedAt}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="inputCover" className="form-label">
+              Cover Image
+            </label>
+            <input
+              type="file"
+              id="inputCover"
+              accept="image/*"
+              onChange={handleFileChange} // Menangani perubahan file
               className="form-control"
               required
             />

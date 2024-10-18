@@ -60,11 +60,17 @@ function asyncGetAuctions() {
   };
 }
 
-function asyncAddAuction({ title, description, start_bid, closed_at }) {
+function asyncAddAuction({ title, description, start_bid, closed_at, cover }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      await api.postAddAucation({ title, description, start_bid, closed_at });
+      await api.postAddAuction({
+        title,
+        description,
+        start_bid,
+        closed_at,
+        cover,
+      });
       dispatch(addAuctionActionCreator(true));
     } catch (error) {
       showErrorDialog(error.message);

@@ -25,7 +25,7 @@ function Navigation({ authLogin, onAuthSignOut }) {
               <li className="mt-2">
                 <Link
                   className="btn btn-light btn-sm text-dark"
-                  to="/todos/add"
+                  to="/auctions/add"
                 >
                   <FaPlus /> Add New Aucations
                 </Link>
