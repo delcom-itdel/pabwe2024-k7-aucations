@@ -10,9 +10,10 @@ import { useNavigate } from "react-router-dom";
 function AuctionAddPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAddAuction = false } = useSelector((states) => states); // Selector untuk melihat status tambah Auction
+  const { isAddAuction = false } = useSelector((states) => states.isAddAuction); // Selector untuk melihat status tambah Auction
 
   useEffect(() => {
+    console.log("isAddAuction:", isAddAuction);
     if (isAddAuction) {
       Swal.fire({
         position: "center",
@@ -21,13 +22,21 @@ function AuctionAddPage() {
         showConfirmButton: false,
         timer: 700,
       });
-      navigate("/auctions"); // Redirect ke halaman Auctions setelah sukses
+      navigate("/");
       dispatch(addAuctionActionCreator(false)); // Reset status add auction
     }
   }, [isAddAuction, navigate, dispatch]);
 
-  const onAddAuction = ({ title, description, start_bid, closed_at }) => {
-    dispatch(asyncAddAuction({ title, description, start_bid, closed_at })); // Dispatch action untuk menambahkan auction
+  const onAddAuction = ({
+    title,
+    description,
+    start_bid,
+    closed_at,
+    cover,
+  }) => {
+    dispatch(
+      asyncAddAuction({ title, description, start_bid, closed_at, cover })
+    ); // Dispatch action untuk menambahkan auction
   };
 
   return (

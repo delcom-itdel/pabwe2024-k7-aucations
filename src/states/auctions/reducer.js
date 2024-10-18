@@ -11,6 +11,7 @@ function auctionsReducer(auctions = [], action = {}) {
 }
 
 function isAddAuctionReducer(status = false, action = {}) {
+  console.log("Reducer ADD_AUCTION dipanggil:", action);
   switch (action.type) {
     case ActionType.ADD_AUCTION:
       return action.payload.status;
