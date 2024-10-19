@@ -136,6 +136,17 @@ const api = (() => {
     return responseJson.data.aucation;
   }
 
+  async function deleteAuction(id) {
+    const response = await _fetchWithAuth(`${BASE_URL}/aucations/${id}`, {
+      method: "DELETE",
+    });
+    const responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message || "Failed to delete auction");
+    }
+    return responseJson.message;
+  }
+
   // API Todos
   async function postAddTodo({ title, description }) {
     const response = await _fetchWithAuth(`${BASE_URL}/todos`, {
@@ -232,6 +243,7 @@ const api = (() => {
     getAllAuctions,
     getDetailAuction,
     postChangePhotoProfile,
+    deleteAuction,
     postAddTodo,
     postChangeCoverTodo,
     putUpdateTodo,
