@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom"; // Added import for Link
+import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa6"; // Added import for trash icon
 import Swal from "sweetalert2"; // SweetAlert2 for confirmation dialogs
 
@@ -48,14 +48,17 @@ function AuctionItem({ auction, onDeleteAuction }) {
             <p>
               Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
             </p>
-            {/* Delete button with trash icon */}
-            <button
-              type="button"
-              onClick={handleDelete} // Call handleDelete when clicked
-              className="btn btn-sm btn-outline-danger"
-            >
-              <FaTrash /> Hapus
-            </button>
+
+            {/* Only show delete button if onDeleteAuction is provided */}
+            {onDeleteAuction && (
+              <button
+                type="button"
+                onClick={handleDelete} // Call handleDelete when clicked
+                className="btn btn-sm btn-outline-danger"
+              >
+                <FaTrash /> Hapus
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -72,7 +75,7 @@ AuctionItem.propTypes = {
     closed_at: PropTypes.string.isRequired,
     cover: PropTypes.string, // Cover image URL
   }).isRequired,
-  onDeleteAuction: PropTypes.func.isRequired, // Prop for the delete function
+  onDeleteAuction: PropTypes.func, // Make this optional
 };
 
 export default AuctionItem;

@@ -12,6 +12,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import AuctionAddPage from "./pages/AuctionAddPage";
 import AuctionDetailPage from "./pages/AuctionDetailPage";
+import AuctionEditPage from "./pages/AuctionEditPage";
 
 function App() {
   const { authLogin = null, isPreload = false } = useSelector(
@@ -79,6 +80,7 @@ function App() {
             <Route path="/users/me" element={<ProfilePage />} />
             <Route path="/auctions/add" element={<AuctionAddPage />} />
             <Route path="/auctions/:id" element={<AuctionDetailPage />} />
+            <Route path="/auctions/edit/:id" element={<AuctionEditPage />} />
           </Routes>
         </main>
       </div>

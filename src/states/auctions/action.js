@@ -1,6 +1,7 @@
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import api from "../../utils/api";
 import { showErrorDialog } from "../../utils/tools";
+import Swal from "sweetalert2";
 
 const ActionType = {
   GET_AUCTIONS: "GET_AUCTIONS",
@@ -109,6 +110,35 @@ function asyncDetailAuction(id) {
   };
 }
 
+function asyncEditAuction(
+  { id, title, description, start_bid, closed_at },
+  navigate
+) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      // Memanggil API untuk mengupdate auction
+      await api.putUpdateAuction({
+        id,
+        title,
+        description,
+        start_bid,
+        closed_at,
+      });
+
+      // Setelah berhasil, panggil detail auction kembali
+      dispatch(asyncDetailAuction(id)); // Memuat ulang detail auction yang sudah diedit
+      Swal.fire("Success", "Auction updated successfully", "success");
+
+      // Panggil navigate untuk kembali ke halaman detail setelah update berhasil
+      navigate("/");
+    } catch (error) {
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   getAuctionsActionCreator,
@@ -119,4 +149,5 @@ export {
   asyncDeleteAuction,
   detailAuctionActionCreator,
   asyncDetailAuction,
+  asyncEditAuction,
 };

@@ -147,6 +147,34 @@ const api = (() => {
     return responseJson.message;
   }
 
+  async function putUpdateAuction({
+    id,
+    title,
+    description,
+    start_bid,
+    closed_at,
+  }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/aucations/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        title,
+        description,
+        start_bid,
+        closed_at,
+      }),
+    });
+
+    const responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message || "Failed to update auction");
+    }
+
+    return responseJson;
+  }
+
   // API Todos
   async function postAddTodo({ title, description }) {
     const response = await _fetchWithAuth(`${BASE_URL}/todos`, {
@@ -242,6 +270,7 @@ const api = (() => {
     postAddAuction,
     getAllAuctions,
     getDetailAuction,
+    putUpdateAuction,
     postChangePhotoProfile,
     deleteAuction,
     postAddTodo,

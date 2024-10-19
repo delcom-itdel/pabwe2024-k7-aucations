@@ -17,7 +17,7 @@ function AuctionList({ auctions, onDeleteAuction }) {
 
 AuctionList.propTypes = {
   auctions: PropTypes.array.isRequired,
-  onDeleteAuction: PropTypes.func.isRequired,
+  onDeleteAuction: PropTypes.func,
 };
 
 export default AuctionList;

@@ -1,41 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  asyncGetAuctions,
-  asyncDeleteAuction,
-  deleteAuctionActionCreator,
-} from "../states/auctions/action";
+import { asyncGetAuctions } from "../states/auctions/action"; // Hapus asyncDeleteAuction jika tidak digunakan di sini
 import AuctionList from "../components/AuctionList";
-import { useNavigate } from "react-router-dom"; // Tambahkan ini untuk navigasi
-//import Swal from "sweetalert2"; // Assuming you are using SweetAlert for notifications
+import Swal from "sweetalert2"; // Assuming you are using SweetAlert for notifications
 
 function HomePage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Gunakan hook useNavigate untuk navigasi
-  const {
-    authLogin = null,
-    auctions = [],
-    isDeleteAuction = false,
-  } = useSelector((states) => states);
+  const { authLogin = null, auctions = [] } = useSelector((states) => states);
 
   useEffect(() => {
-    if (isDeleteAuction) {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Auction successfully deleted!",
-        showConfirmButton: false,
-        timer: 700,
-      });
-      dispatch(deleteAuctionActionCreator(false)); // Reset the delete state
-      navigate("/"); // Navigasi ke homepage setelah penghapusan sukses
-    }
     dispatch(asyncGetAuctions()); // Fetch all auctions when the component loads
-  }, [dispatch, isDeleteAuction, navigate]);
-
-  const onDeleteAuction = (id) => {
-    dispatch(asyncDeleteAuction(id, navigate)); // Tambahkan navigate sebagai argumen
-  };
+  }, [dispatch]);
 
   return (
     <section>
@@ -46,9 +21,8 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Display list of auctions */}
         {auctions.length > 0 ? (
-          <AuctionList auctions={auctions} onDeleteAuction={onDeleteAuction} />
+          <AuctionList auctions={auctions} />
         ) : (
           <p>No auctions available</p>
         )}
