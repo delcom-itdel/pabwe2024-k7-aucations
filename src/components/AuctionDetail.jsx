@@ -15,10 +15,12 @@ function AuctionDetail({ auction }) {
               src={auction.cover}
               alt={`Cover for ${auction.title}`}
               style={{
-                maxWidth: "300px", // Batas maksimum lebar gambar
-                height: "auto", // Otomatis menyesuaikan tinggi agar proporsional
-                display: "block", // Untuk memastikan gambar ditampilkan sebagai blok
-                margin: "0 auto", // Agar gambar berada di tengah
+                width: "400px", // Increased width
+                height: "300px", // Increased height
+                objectFit: "cover", // Maintain aspect ratio and fill the box
+                display: "block", // Ensure image is displayed as a block
+                marginLeft: "0", // Align left
+                marginRight: "auto", // Center the right margin
               }}
             />
           </div>
