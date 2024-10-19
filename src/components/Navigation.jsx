@@ -5,17 +5,57 @@ import { FaPlus, FaUser, FaRightFromBracket } from "react-icons/fa6";
 function Navigation({ authLogin, onAuthSignOut }) {
   const { id, name, photo } = authLogin;
 
-  const greenColor = "#4CAF50";
-  const whiteColor = "#fff";
+  const styles = {
+    navbar: {
+      backgroundColor: "#07575B",
+      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+      transition: "background-color 0.3s",
+    },
+    navbarBrand: {
+      color: "#fff",
+      fontWeight: "bold",
+      fontSize: "1.5rem",
+    },
+    button: {
+      backgroundColor: "#fff",
+      color: "#07575B",
+      border: "none",
+      borderRadius: "20px",
+      padding: "0.5rem 1rem",
+      marginRight: "10px",
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+      transition: "all 0.3s",
+    },
+    buttonHover: {
+      backgroundColor: "#e0e0e0",
+    },
+    profileImg: {
+      borderRadius: "50%",
+      border: "3px solid #07575B",
+      width: "40px",
+      height: "40px",
+    },
+    dropdownMenu: {
+      backgroundColor: "#07575B",
+      borderRadius: "5px",
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+    },
+    dropdownItem: {
+      color: "#fff",
+      padding: "10px 20px",
+      textDecoration: "none",
+      transition: "background-color 0.2s",
+    },
+    dropdownItemHover: {
+      backgroundColor: "#66A5AD",
+    },
+  };
 
   return (
     <div>
-      <nav
-        className="navbar navbar-expand-lg navbar-dark"
-        style={{ backgroundColor: greenColor }}
-      >
+      <nav className="navbar navbar-expand-lg" style={styles.navbar}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/" style={{ color: whiteColor }}>
+          <Link className="navbar-brand" to="/" style={styles.navbarBrand}>
             Aucation App
           </Link>
           <button
@@ -26,23 +66,25 @@ function Navigation({ authLogin, onAuthSignOut }) {
             aria-controls="navApp"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            style={{ borderColor: whiteColor }}
+            style={{ borderColor: "#fff" }}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navApp">
             <ul className="navbar-nav ms-auto">
               <li className="mt-2 me-2">
-                {" "}
-                {/* Add a 1 cm gap to the right */}
                 <Link
                   className="btn btn-light btn-sm text-dark"
                   to="/auctions/add"
-                  style={{
-                    backgroundColor: whiteColor,
-                    color: greenColor,
-                    marginRight: "10px", // 1 cm gap (10px)
-                  }}
+                  style={styles.button}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.buttonHover.backgroundColor)
+                  }
+                  onMouseOut={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      styles.button.backgroundColor)
+                  }
                 >
                   <FaPlus /> Add New Auctions
                 </Link>
@@ -55,31 +97,33 @@ function Navigation({ authLogin, onAuthSignOut }) {
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{ color: whiteColor }}
+                  style={{ color: "#fff" }}
                 >
                   <img
                     className="nav-profile"
                     src={photo}
                     alt={id}
                     title={name}
-                    style={{
-                      borderRadius: "50%",
-                      border: `2px solid ${greenColor}`,
-                      width: "40px",
-                      height: "40px",
-                    }}
+                    style={styles.profileImg}
                   />
                 </a>
                 <ul
                   className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="navUser"
-                  style={{ backgroundColor: greenColor, borderRadius: "5px" }}
+                  style={styles.dropdownMenu}
                 >
                   <li>
                     <Link
                       className="dropdown-item"
                       to="/users/me"
-                      style={{ color: whiteColor }}
+                      style={styles.dropdownItem}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          styles.dropdownItemHover.backgroundColor)
+                      }
+                      onMouseOut={(e) =>
+                        (e.currentTarget.style.backgroundColor = "transparent")
+                      }
                     >
                       <FaUser /> Profile
                     </Link>
@@ -89,7 +133,14 @@ function Navigation({ authLogin, onAuthSignOut }) {
                       type="button"
                       className="dropdown-item"
                       onClick={onAuthSignOut}
-                      style={{ color: whiteColor }}
+                      style={styles.dropdownItem}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.backgroundColor =
+                          styles.dropdownItemHover.backgroundColor)
+                      }
+                      onMouseOut={(e) =>
+                        (e.currentTarget.style.backgroundColor = "transparent")
+                      }
                     >
                       <FaRightFromBracket /> Sign out
                     </button>

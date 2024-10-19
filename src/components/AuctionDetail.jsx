@@ -15,8 +15,8 @@ function AuctionDetail({ auction }) {
               src={auction.cover}
               alt={`Cover for ${auction.title}`}
               style={{
-                width: "400px", // Increased width
-                height: "300px", // Increased height
+                width: "600px", // Increased width for longer display
+                height: "400px", // Increased height for taller display
                 objectFit: "cover", // Maintain aspect ratio and fill the box
                 display: "block", // Ensure image is displayed as a block
                 marginLeft: "0", // Align left
