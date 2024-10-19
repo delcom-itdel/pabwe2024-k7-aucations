@@ -50,6 +50,7 @@ function AuctionInput({ onAddAuction }) {
               onChange={(e) => setTitle(e.target.value)}
               value={title}
               className="form-control"
+              placeholder="Enter auction title"
               required
             />
           </div>
@@ -63,12 +64,13 @@ function AuctionInput({ onAddAuction }) {
               value={description}
               className="form-control"
               rows="3"
+              placeholder="Enter auction description"
               required
             ></textarea>
           </div>
           <div className="mb-3">
             <label htmlFor="inputStartBid" className="form-label">
-              Start Bid
+              Start Bid (in Rupiah)
             </label>
             <input
               type="number"
@@ -76,6 +78,7 @@ function AuctionInput({ onAddAuction }) {
               onChange={(e) => setStartBid(e.target.value)}
               value={startBid}
               className="form-control"
+              placeholder="Enter starting bid"
               required
             />
           </div>
@@ -104,6 +107,15 @@ function AuctionInput({ onAddAuction }) {
               className="form-control"
               required
             />
+            {cover && (
+              <div className="mt-3">
+                <img
+                  src={URL.createObjectURL(cover)}
+                  alt="Cover Preview"
+                  style={{ width: '150px', height: 'auto', objectFit: 'cover' }} // Ukuran pratinjau yang lebih kecil
+                />
+              </div>
+            )}
           </div>
           <div className="text-end">
             <button type="submit" className="btn btn-primary">
