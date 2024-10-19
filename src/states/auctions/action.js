@@ -8,6 +8,7 @@ const ActionType = {
   ADD_AUCTION: "ADD_AUCTION",
   DELETE_AUCTION: "DELETE_AUCTION",
   DETAIL_AUCTION: "DETAIL_AUCTION",
+  ADD_BID: "ADD_BID",
 };
 
 function getAuctionsActionCreator(auctions) {
@@ -42,6 +43,15 @@ function detailAuctionActionCreator(auction) {
     type: ActionType.DETAIL_AUCTION,
     payload: {
       auction,
+    },
+  };
+}
+
+function addBidActionCreator(bid) {
+  return {
+    type: ActionType.ADD_BID,
+    payload: {
+      bid,
     },
   };
 }
@@ -153,6 +163,49 @@ function asyncChangeAuctionCover({ id, cover }) {
   };
 }
 
+function asyncAddBid({ id, bid }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      // Panggil API untuk menambah bid
+      await api.postAddBid({ id, bid });
+
+      // Tampilkan pesan sukses
+      Swal.fire(
+        "Success",
+        "Berhasil memberikan tawaran pada lelang",
+        "success"
+      );
+
+      // Update state dengan bid yang baru
+      dispatch(addBidActionCreator({ id, bid }));
+    } catch (error) {
+      // Tampilkan pesan error
+      Swal.fire("Error", error.message, "error");
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
+function asyncDeleteBid({ id }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      await api.deleteBid({ id });
+      // Tampilkan pesan sukses
+      Swal.fire("Success", "Berhasil menghapus tawaran pada lelang", "success");
+      // Perbarui detail auction setelah penghapusan bid
+      dispatch(asyncDetailAuction(id));
+    } catch (error) {
+      // Tampilkan pesan error jika gagal
+      Swal.fire("Error", error.message, "error");
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   getAuctionsActionCreator,
@@ -165,4 +218,6 @@ export {
   asyncDetailAuction,
   asyncEditAuction,
   asyncChangeAuctionCover,
+  asyncAddBid,
+  asyncDeleteBid,
 };

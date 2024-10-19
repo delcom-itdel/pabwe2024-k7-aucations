@@ -189,18 +189,34 @@ const api = (() => {
     return responseJson.message;
   }
 
-  // API Todos
-  async function postChangeCoverTodo({ id, cover }) {
-    const formData = new FormData();
-    formData.append("cover", cover);
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}/cover`, {
+  async function postAddBid({ id, bid }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/aucations/${id}/bids`, {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        bid: bid,
+      }),
     });
+
     const responseJson = await response.json();
     if (!response.ok) {
-      throw new Error(responseJson.message || "Failed to change cover");
+      throw new Error(responseJson.message || "Failed to add bid");
     }
+    return responseJson;
+  }
+
+  async function deleteBid({ id }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/aucations/${id}/bids`, {
+      method: "DELETE",
+    });
+
+    const responseJson = await response.json();
+    if (!response.ok) {
+      throw new Error(responseJson.message || "Failed to delete bid");
+    }
+
     return responseJson.message;
   }
 
@@ -217,6 +233,8 @@ const api = (() => {
     postChangePhotoProfile,
     deleteAuction,
     postChangeAuctionCover,
+    postAddBid,
+    deleteBid,
   };
 })();
 

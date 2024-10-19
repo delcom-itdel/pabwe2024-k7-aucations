@@ -33,6 +33,13 @@ function detailAuctionReducer(auction = null, action = {}) {
   switch (action.type) {
     case ActionType.DETAIL_AUCTION:
       return action.payload.auction;
+
+    case ActionType.ADD_BID:
+      return {
+        ...auction,
+        bids: [...auction.bids, action.payload.bid], // Tambahkan bid baru ke dalam array bids
+      };
+
     default:
       return auction;
   }

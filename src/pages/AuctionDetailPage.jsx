@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   asyncDetailAuction,
   asyncDeleteAuction,
-  asyncChangeAuctionCover, // Pastikan asyncChangeAuctionCover diimpor
+  asyncChangeAuctionCover,
+  asyncAddBid,
+  asyncDeleteBid,
 } from "../states/auctions/action";
 import AuctionDetail from "../components/AuctionDetail";
 import Swal from "sweetalert2"; // SweetAlert for confirmation dialogs
@@ -21,6 +23,7 @@ function AuctionDetailPage() {
   }));
 
   const [selectedCover, setSelectedCover] = useState(null);
+  const [bidAmount, setBidAmount] = useState("");
 
   useEffect(() => {
     if (id) {
@@ -71,6 +74,46 @@ function AuctionDetailPage() {
     }
   };
 
+  const handleAddBid = async () => {
+    if (bidAmount > 0) {
+      // Tambahkan bid dan tunggu hingga selesai
+      await dispatch(asyncAddBid({ id, bid: bidAmount }));
+
+      // Tampilkan pesan sukses
+      Swal.fire("Success", "Bid successfully added", "success");
+
+      // Memuat ulang detail lelang untuk menampilkan data terbaru
+      await dispatch(asyncDetailAuction(id));
+    } else {
+      Swal.fire("Error", "Please enter a valid bid amount", "error");
+    }
+  };
+
+  const handleDeleteBid = () => {
+    Swal.fire({
+      title: "Hapus Tawaran",
+      text: `Apakah kamu yakin ingin menghapus tawaranmu pada lelang ini?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, Hapus Tawaran",
+      customClass: {
+        confirmButton: "btn btn-danger me-3 mb-4",
+        cancelButton: "btn btn-secondary mb-4",
+      },
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(asyncDeleteBid({ id }));
+      }
+    });
+  };
+
+  const highestBid = detailAuction?.bids.length
+    ? Math.max(...detailAuction.bids.map((bid) => bid.bid))
+    : null;
+
+  const myBid = detailAuction?.my_bid ? detailAuction.my_bid.bid : null;
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -81,7 +124,25 @@ function AuctionDetailPage() {
         {detailAuction ? (
           <>
             <AuctionDetail auction={detailAuction} />
-            {authLogin && detailAuction.user_id === authLogin.id && (
+            {highestBid !== null && (
+              <div className="mt-3">
+                <h5>Bid Tertinggi: Rp {highestBid.toLocaleString()}</h5>
+              </div>
+            )}
+
+            {myBid !== null && (
+              <div className="mt-3">
+                <h5>Tawaran Anda: Rp {myBid.toLocaleString()}</h5>
+                <button
+                  onClick={handleDeleteBid}
+                  className="btn btn-danger mt-2"
+                >
+                  Hapus Tawaran
+                </button>
+              </div>
+            )}
+
+            {authLogin && detailAuction.user_id === authLogin.id ? (
               <>
                 <button
                   type="button"
@@ -106,7 +167,7 @@ function AuctionDetailPage() {
                     type="file"
                     className="form-control"
                     id="coverInput"
-                    onChange={handleCoverChange} // Hubungkan fungsi handleCoverChange
+                    onChange={handleCoverChange}
                   />
                   <button
                     onClick={handleChangeCover}
@@ -116,6 +177,20 @@ function AuctionDetailPage() {
                   </button>
                 </div>
               </>
+            ) : (
+              <div className="mt-3">
+                <h5>Tambah Tawaran</h5>
+                <input
+                  type="number"
+                  className="form-control"
+                  value={bidAmount}
+                  onChange={(e) => setBidAmount(e.target.value)}
+                  placeholder="Masukkan jumlah tawaran"
+                />
+                <button onClick={handleAddBid} className="btn btn-success mt-2">
+                  Tambah Bid
+                </button>
+              </div>
             )}
           </>
         ) : (

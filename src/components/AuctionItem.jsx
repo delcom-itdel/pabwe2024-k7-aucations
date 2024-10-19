@@ -48,6 +48,7 @@ function AuctionItem({ auction, onDeleteAuction }) {
             <p>
               Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
             </p>
+            <p>Total Bids: {auction.bids.length}</p>
 
             {/* Only show delete button if onDeleteAuction is provided */}
             {onDeleteAuction && (
