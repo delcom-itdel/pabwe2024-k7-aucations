@@ -2,29 +2,43 @@ import PropTypes from "prop-types";
 
 function AuctionDetail({ auction }) {
   return (
-    <div className="card">
+    <div className="card mb-4 shadow-sm">
       <div className="card-body">
-        <h2>{auction.title}</h2>
-        <p>{auction.description}</p>
-        <p>Starting Bid: {auction.start_bid}</p>
-        <p>Closing Date: {new Date(auction.closed_at).toLocaleDateString()}</p>
+        <div className="row">
+          {auction.cover && (
+            <div className="col-4 text-center">
+              <img
+                src={auction.cover}
+                alt={`Cover for ${auction.title}`}
+                style={{
+                  width: "400px", 
+                  height: "300px", 
+                  objectFit: "cover", 
+                  display: "block", 
+                  marginLeft: "auto",
+                  marginRight: "auto", 
+                }}
+              />
+            </div>
+          )}
 
-        {auction.cover && (
-          <div className="mb-3">
-            <img
-              src={auction.cover}
-              alt={`Cover for ${auction.title}`}
-              style={{
-                width: "600px", // Increased width for longer display
-                height: "400px", // Increased height for taller display
-                objectFit: "cover", // Maintain aspect ratio and fill the box
-                display: "block", // Ensure image is displayed as a block
-                marginLeft: "0", // Align left
-                marginRight: "auto", // Center the right margin
-              }}
-            />
+          <div className="col-8">
+            <h2 className="card-title text-primary mt-3" style={{ fontFamily: 'Poppins, sans-serif', fontWeight: '600' }}>
+              {auction.title}
+            </h2>
+
+            <p className="card-text text-start" style={{ maxHeight: "150px", overflowY: "auto", fontFamily: 'Roboto, sans-serif' }}>
+              {auction.description}
+            </p>
+
+            <p className="fw-bold" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Starting Bid: Rp {auction.start_bid.toLocaleString('id-ID')}
+            </p>
+            <p className="text-muted" style={{ fontFamily: 'Roboto, sans-serif' }}>
+              Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
+            </p>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
