@@ -1,31 +1,30 @@
-import { useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom"; // Import Link untuk navigasi ke halaman edit
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   asyncDetailAuction,
   asyncDeleteAuction,
+  asyncChangeAuctionCover, // Pastikan asyncChangeAuctionCover diimpor
 } from "../states/auctions/action";
 import AuctionDetail from "../components/AuctionDetail";
 import Swal from "sweetalert2"; // SweetAlert for confirmation dialogs
 
 function AuctionDetailPage() {
-  const { id } = useParams(); // Ambil ID dari URL
-  const navigate = useNavigate(); // Untuk navigasi
+  const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {
-    authLogin = null,
-    detailAuction = null,
-    loading,
-  } = useSelector((states) => ({
+  const { authLogin, detailAuction, loading } = useSelector((states) => ({
     detailAuction: states.detailAuction,
-    loading: states.loading, // Optional: loading state
-    authLogin: states.authLogin, // Ensure you have user data
+    loading: states.loading,
+    authLogin: states.authLogin,
   }));
+
+  const [selectedCover, setSelectedCover] = useState(null);
 
   useEffect(() => {
     if (id) {
-      dispatch(asyncDetailAuction(id)); // Fetch auction details
+      dispatch(asyncDetailAuction(id));
     }
   }, [id, dispatch]);
 
@@ -43,14 +42,37 @@ function AuctionDetailPage() {
       buttonsStyling: false,
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(asyncDeleteAuction(id)); // Delete the auction
+        dispatch(asyncDeleteAuction(id));
         navigate("/"); // Navigate back to homepage after deletion
       }
     });
   };
 
+  // Definisikan fungsi handleCoverChange
+  const handleCoverChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedCover(file);
+    }
+  };
+
+  const handleChangeCover = () => {
+    if (selectedCover) {
+      dispatch(asyncChangeAuctionCover({ id, cover: selectedCover }))
+        .then(() => {
+          Swal.fire("Success", "Auction cover updated successfully", "success");
+          navigate("/"); // Kembali ke halaman utama setelah berhasil
+        })
+        .catch((error) => {
+          Swal.fire("Error", error.message, "error");
+        });
+    } else {
+      Swal.fire("Error", "Please select a cover to upload", "error");
+    }
+  };
+
   if (loading) {
-    return <div>Loading...</div>; // Show loading if fetching data
+    return <div>Loading...</div>;
   }
 
   return (
@@ -59,7 +81,6 @@ function AuctionDetailPage() {
         {detailAuction ? (
           <>
             <AuctionDetail auction={detailAuction} />
-            {/* Tampilkan tombol jika user login adalah pemilik auction */}
             {authLogin && detailAuction.user_id === authLogin.id && (
               <>
                 <button
@@ -70,11 +91,30 @@ function AuctionDetailPage() {
                   Hapus Lelang
                 </button>
                 <Link
-                  to={`/auctions/edit/${id}`} // Navigasi ke halaman edit
+                  to={`/auctions/edit/${id}`}
                   className="btn btn-primary mt-3 ms-2"
                 >
                   Edit Lelang
                 </Link>
+
+                {/* Input untuk mengganti cover */}
+                <div className="mb-3 mt-3">
+                  <label htmlFor="coverInput" className="form-label">
+                    Ubah Cover Lelang:
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="coverInput"
+                    onChange={handleCoverChange} // Hubungkan fungsi handleCoverChange
+                  />
+                  <button
+                    onClick={handleChangeCover}
+                    className="btn btn-primary mt-2"
+                  >
+                    Ubah Cover
+                  </button>
+                </div>
               </>
             )}
           </>

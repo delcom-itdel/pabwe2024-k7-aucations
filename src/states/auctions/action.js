@@ -139,6 +139,20 @@ function asyncEditAuction(
   };
 }
 
+function asyncChangeAuctionCover({ id, cover }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      await api.postChangeAuctionCover({ id, cover });
+      dispatch(asyncDetailAuction(id)); // Reload auction details after changing cover
+      Swal.fire("Success", "Cover updated successfully", "success");
+    } catch (error) {
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 export {
   ActionType,
   getAuctionsActionCreator,
@@ -150,4 +164,5 @@ export {
   detailAuctionActionCreator,
   asyncDetailAuction,
   asyncEditAuction,
+  asyncChangeAuctionCover,
 };

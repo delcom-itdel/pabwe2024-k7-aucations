@@ -175,25 +175,21 @@ const api = (() => {
     return responseJson;
   }
 
-  // API Todos
-  async function postAddTodo({ title, description }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos`, {
+  async function postChangeAuctionCover({ id, cover }) {
+    const formData = new FormData();
+    formData.append("cover", cover);
+    const response = await _fetchWithAuth(`${BASE_URL}/aucations/${id}/cover`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        description,
-      }),
+      body: formData,
     });
     const responseJson = await response.json();
     if (!response.ok) {
-      throw new Error(responseJson.message || "Failed to add todo");
+      throw new Error(responseJson.message || "Failed to change auction cover");
     }
-    return responseJson.data.todo_id;
+    return responseJson.message;
   }
 
+  // API Todos
   async function postChangeCoverTodo({ id, cover }) {
     const formData = new FormData();
     formData.append("cover", cover);
@@ -208,59 +204,6 @@ const api = (() => {
     return responseJson.message;
   }
 
-  async function putUpdateTodo({ id, title, description, is_finished }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        is_finished,
-      }),
-    });
-    const responseJson = await response.json();
-    if (!response.ok) {
-      throw new Error(responseJson.message || "Failed to update todo");
-    }
-    return responseJson.data.todo_id;
-  }
-
-  async function deleteTodo(id) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const responseJson = await response.json();
-    if (!response.ok) {
-      throw new Error(responseJson.message || "Failed to delete todo");
-    }
-    return responseJson.message;
-  }
-
-  async function getAllTodos(is_finished) {
-    const response = await _fetchWithAuth(
-      `${BASE_URL}/todos?is_finished=${is_finished}`
-    );
-    const responseJson = await response.json();
-    if (!response.ok) {
-      throw new Error(responseJson.message || "Failed to fetch todos");
-    }
-    return responseJson.data.todos;
-  }
-
-  async function getDetailTodo(id) {
-    const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`);
-    const responseJson = await response.json();
-    if (!response.ok) {
-      throw new Error(responseJson.message || "Failed to fetch todo detail");
-    }
-    return responseJson.data.todo;
-  }
-
   return {
     putAccessToken,
     getAccessToken,
@@ -273,12 +216,7 @@ const api = (() => {
     putUpdateAuction,
     postChangePhotoProfile,
     deleteAuction,
-    postAddTodo,
-    postChangeCoverTodo,
-    putUpdateTodo,
-    deleteTodo,
-    getAllTodos,
-    getDetailTodo,
+    postChangeAuctionCover,
   };
 })();
 
