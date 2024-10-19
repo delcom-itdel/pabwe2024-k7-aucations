@@ -32,3 +32,4 @@
 ### [19-10-2024]
 
 - Menampilkan cover, dan mumunculkan detail auction
+- Menambahkan Fitur Delete
