@@ -3,13 +3,15 @@ import AuctionItem from "./AuctionItem"; // Komponen untuk satu item auction
 
 function AuctionList({ auctions, onDeleteAuction }) {
   return (
-    <div>
+    <div className="row">
+      {" "}
+      {/* Menambahkan kelas row untuk memulai grid */}
       {auctions.map((auction) => (
-        <AuctionItem
-          key={auction.id}
-          auction={auction}
-          onDeleteAuction={onDeleteAuction}
-        />
+        <div className="col-md-4 mb-4" key={auction.id}>
+          {" "}
+          {/* Menggunakan 4 kolom per baris untuk mendapatkan 3 kartu */}
+          <AuctionItem auction={auction} onDeleteAuction={onDeleteAuction} />
+        </div>
       ))}
     </div>
   );
