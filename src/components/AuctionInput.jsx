@@ -6,13 +6,12 @@ function AuctionInput({ onAddAuction }) {
   const [description, setDescription] = useState("");
   const [startBid, setStartBid] = useState("");
   const [closedAt, setClosedAt] = useState("");
-  const [cover, setCover] = useState(null); // Simpan file cover di state
+  const [cover, setCover] = useState(null); 
 
-  // Handler untuk menambah auction
   function handleOnAddAuction(e) {
     e.preventDefault();
 
-    const fullClosedAt = `${closedAt} 23:59:59`; // Tambahkan waktu default ke closedAt
+    const fullClosedAt = `${closedAt} 23:59:59`; 
 
     if (title.trim() && description.trim() && startBid && closedAt && cover) {
       onAddAuction({
@@ -20,18 +19,17 @@ function AuctionInput({ onAddAuction }) {
         description,
         start_bid: startBid,
         closed_at: fullClosedAt,
-        cover, // Kirim file cover
+        cover, 
       });
     } else {
       alert("Please fill in all fields, including the cover image.");
     }
   }
 
-  // Handler untuk menangani perubahan file cover
   function handleFileChange(e) {
-    const selectedFile = e.target.files[0]; // Ambil file dari input
-    setCover(selectedFile); // Simpan file ke state cover
-    console.log("File selected:", selectedFile); // Logging untuk debugging
+    const selectedFile = e.target.files[0]; 
+    setCover(selectedFile); 
+    console.log("File selected:", selectedFile); 
   }
 
   return (
@@ -103,7 +101,7 @@ function AuctionInput({ onAddAuction }) {
               type="file"
               id="inputCover"
               accept="image/*"
-              onChange={handleFileChange} // Menangani perubahan file
+              onChange={handleFileChange} 
               className="form-control"
               required
             />
@@ -112,7 +110,7 @@ function AuctionInput({ onAddAuction }) {
                 <img
                   src={URL.createObjectURL(cover)}
                   alt="Cover Preview"
-                  style={{ width: '150px', height: 'auto', objectFit: 'cover' }} // Ukuran pratinjau yang lebih kecil
+                  style={{ width: '150px', height: 'auto', objectFit: 'cover' }} 
                 />
               </div>
             )}
