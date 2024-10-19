@@ -133,7 +133,7 @@ const api = (() => {
     if (!response.ok) {
       throw new Error(responseJson.message || "Failed to fetch todo detail");
     }
-    return responseJson.data.todo;
+    return responseJson.data.aucation;
   }
 
   // API Todos
