@@ -31,5 +31,6 @@
 
 ### [19-10-2024]
 
-- Menampilkan cover, dan mumunculkan detail auction
-- Menambahkan Fitur Delete
+- Menampilkan cover, dan mumunculkan detail auction (11S22036 - Rohit Panjaitan)
+- Menambahkan Fitur Delete (11S22054 - Charlos Purba)
+- Menambah Fitur Edit (11S22036 - Rohit Panjaitan)
