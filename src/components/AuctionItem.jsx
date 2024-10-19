@@ -32,7 +32,7 @@ function AuctionItem({ auction, onDeleteAuction }) {
           src={auction.cover}
           className="card-img-top"
           alt={auction.title}
-          style={{ maxHeight: "250px", objectFit: "cover" }} // Meningkatkan tinggi maksimum gambar
+          style={{ width: "100%", height: "250px", objectFit: "cover" }}
         />
       )}
       <div className="card-body d-flex flex-column">

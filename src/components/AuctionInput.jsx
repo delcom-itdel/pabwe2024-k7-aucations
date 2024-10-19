@@ -6,12 +6,12 @@ function AuctionInput({ onAddAuction }) {
   const [description, setDescription] = useState("");
   const [startBid, setStartBid] = useState("");
   const [closedAt, setClosedAt] = useState("");
-  const [cover, setCover] = useState(null); 
+  const [cover, setCover] = useState(null);
 
   function handleOnAddAuction(e) {
     e.preventDefault();
 
-    const fullClosedAt = `${closedAt} 23:59:59`; 
+    const fullClosedAt = `${closedAt} 23:59:59`;
 
     if (title.trim() && description.trim() && startBid && closedAt && cover) {
       onAddAuction({
@@ -19,7 +19,7 @@ function AuctionInput({ onAddAuction }) {
         description,
         start_bid: startBid,
         closed_at: fullClosedAt,
-        cover, 
+        cover,
       });
     } else {
       alert("Please fill in all fields, including the cover image.");
@@ -27,9 +27,9 @@ function AuctionInput({ onAddAuction }) {
   }
 
   function handleFileChange(e) {
-    const selectedFile = e.target.files[0]; 
-    setCover(selectedFile); 
-    console.log("File selected:", selectedFile); 
+    const selectedFile = e.target.files[0];
+    setCover(selectedFile);
+    console.log("File selected:", selectedFile);
   }
 
   return (
@@ -101,7 +101,7 @@ function AuctionInput({ onAddAuction }) {
               type="file"
               id="inputCover"
               accept="image/*"
-              onChange={handleFileChange} 
+              onChange={handleFileChange}
               className="form-control"
               required
             />
@@ -110,7 +110,11 @@ function AuctionInput({ onAddAuction }) {
                 <img
                   src={URL.createObjectURL(cover)}
                   alt="Cover Preview"
-                  style={{ width: '150px', height: 'auto', objectFit: 'cover' }} 
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
             )}
