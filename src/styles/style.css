@@ -1,3 +1,4 @@
+/* CSS yang sudah ada */
 body {
   background-color: #e8e8e8;
   margin-bottom: 50px;
@@ -53,4 +54,39 @@ a {
   100% {
     transform: rotate(1turn);
   }
+}
+
+.auction-card {
+  margin-bottom: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px; 
+}
+
+.title-card {
+  background-color: #4A7A82; 
+  color: white;
+  margin-bottom: 15px; /* Menambahkan jarak bawah */
+}
+
+.bid-date-card {
+  background-color: white;
+  color: #4A7A82; 
+  padding: 15px;
+  margin-top: 15px; /* Menambahkan jarak antara judul dan bid */
+}
+
+.view-button {
+  color: white;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  top: 10px; 
+  right: 10px; 
+  font-size: 14px;
+  position: absolute;
 }

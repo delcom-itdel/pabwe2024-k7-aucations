@@ -10,98 +10,66 @@ function AuctionDetail({ auction }) {
 
   return (
     <>
-      <div className="card mb-4 shadow-sm">
-        <div className="card-body">
-          <div className="row">
-            {auction.cover && (
-              <div className="col-4 text-center position-relative">
-                <img
-                  src={auction.cover}
-                  alt={`Cover untuk ${auction.title}`}
-                  style={{
-                    width: "400px",
-                    height: "300px",
-                    objectFit: "cover",
-                    display: "block",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    cursor: "pointer", // gambar bisa diklik
-                    position: "relative",
-                  }}
-                  onClick={openModal} // buka sewaktu diklik
-                />
-
-                <div
-                  className="position-absolute"
-                  style={{
-                    color: "white",
-                    fontWeight: "bold",
-                    backgroundColor: "rgba(0, 0, 0, 0.4)",
-                    padding: "5px 10px",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    bottom: "1px", // kanan bawah
-                    right: "15px",
-                    fontSize: "14px",
-                  }}
-                  onClick={openModal}
-                >
-                  <FaSearchPlus className="me-2" /> View
-                </div>
+      <div className="card mb-4 shadow-sm auction-card">
+        <div className="row g-0" style={{ height: "100%" }}>
+          <div className="col-md-6 d-flex flex-column" style={{ padding: "10px" }}>
+            <div className="card title-card">
+              <div style={{ padding: "10px", textAlign: "center" }}>
+                <h2 className="card-title title-spacing"> {/* Tambahkan kelas title-spacing */}
+                  {auction.title}
+                </h2>
               </div>
-            )}
-
-            <div className="col-8">
-              <h2
-                className="card-title text-primary mt-3"
-                style={{ fontFamily: "Poppins, sans-serif", fontWeight: "600" }}
-              >
-                {auction.title}
-              </h2>
-
-              <p
-                className="card-text text-start"
-                style={{
-                  maxHeight: "150px",
-                  overflowY: "auto",
-                  fontFamily: "Roboto, sans-serif",
-                }}
-              >
-                {auction.description}
-              </p>
-
-              <p
-                className="fw-bold"
-                style={{ fontFamily: "Roboto, sans-serif" }}
-              >
+            </div>
+           
+            <div className="card bid-date-card mb-3"> 
+              <p className="fw-bold mb-3">
                 Starting Bid: Rp {auction.start_bid.toLocaleString("id-ID")}
               </p>
-              <p
-                className="text-muted"
-                style={{ fontFamily: "Roboto, sans-serif" }}
-              >
+              <p className="text-muted">
                 Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
               </p>
             </div>
+
+            <div className="p-3" style={{ color: "black" }}>
+              <p className="card-text" style={{ maxHeight: "150px", overflowY: "auto" }}>
+                {auction.description}
+              </p>
+            </div>
           </div>
+
+          {auction.cover && (
+            <div className="col-md-6 text-center position-relative" style={{ padding: "10px" }}>
+              <img
+                src={auction.cover}
+                alt={`Cover untuk ${auction.title}`}
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  objectFit: "cover",
+                  cursor: "pointer", 
+                  borderRadius: "5px", 
+                }}
+                onClick={openModal} 
+              />
+             
+              <div
+                className="position-absolute view-button"
+                onClick={openModal}
+              >
+                <FaSearchPlus className="me-2" /> View
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Gambar Full */}
       {auction.cover && (
-        <div
-          className={`modal fade ${isModalOpen ? "show" : ""}`}
-          style={{ display: isModalOpen ? "block" : "none" }}
-        >
+        <div className={`modal fade ${isModalOpen ? "show" : ""}`} style={{ display: isModalOpen ? "block" : "none" }}>
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{auction.title}</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={closeModal}
-                ></button>
+                <button type="button" className="btn-close" onClick={closeModal}></button>
               </div>
               <div className="modal-body text-center">
                 <img
@@ -114,15 +82,6 @@ function AuctionDetail({ auction }) {
                   }}
                 />
               </div>
-              {/* <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={closeModal}
-                >
-                  Tutup
-                </button>
-              </div> */}
             </div>
           </div>
         </div>
