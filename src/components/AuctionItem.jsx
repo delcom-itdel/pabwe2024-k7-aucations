@@ -23,10 +23,17 @@ function AuctionItem({ auction, onDeleteAuction }) {
     });
   };
 
+  const MAX_DESCRIPTION_LENGTH = 100; // Batas panjang deskripsi
+
+  const truncateDescription = (description) => {
+    if (description.length > MAX_DESCRIPTION_LENGTH) {
+      return description.slice(0, MAX_DESCRIPTION_LENGTH) + "...";
+    }
+    return description;
+  };
+
   return (
     <div className="card mb-4" style={{ height: "500px" }}>
-      {" "}
-      {/* Meningkatkan tinggi kartu */}
       {auction.cover && (
         <img
           src={auction.cover}
@@ -39,7 +46,9 @@ function AuctionItem({ auction, onDeleteAuction }) {
         <Link to={`/auctions/${auction.id}`}>
           <h5 className="card-title">{auction.title}</h5>
         </Link>
-        <p className="card-text">{auction.description}</p>
+
+        <p className="card-text">{truncateDescription(auction.description)}</p>
+
         <p className="card-text">Starting Bid: IDR {auction.start_bid}</p>
         <p className="card-text">
           Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
