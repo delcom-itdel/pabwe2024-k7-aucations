@@ -69,6 +69,7 @@ function AuctionEditPage() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="form-control"
+            rows={5}
           />
         </div>
         <div className="mb-3">
@@ -89,7 +90,15 @@ function AuctionEditPage() {
             className="form-control"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+          style={{
+            backgroundColor: "#07575B",
+            borderColor: "#07575B",
+            color: "#fff",
+          }}
+        >
           Save Changes
         </button>
       </form>

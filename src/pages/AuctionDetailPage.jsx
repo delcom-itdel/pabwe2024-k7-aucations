@@ -154,6 +154,11 @@ function AuctionDetailPage() {
                 <Link
                   to={`/auctions/edit/${id}`}
                   className="btn btn-primary mt-3 ms-2"
+                  style={{
+                    backgroundColor: "#07575B",
+                    borderColor: "#07575B",
+                    color: "#fff",
+                  }}
                 >
                   Edit Lelang
                 </Link>
@@ -172,6 +177,11 @@ function AuctionDetailPage() {
                   <button
                     onClick={handleChangeCover}
                     className="btn btn-primary mt-2"
+                    style={{
+                      backgroundColor: "#07575B",
+                      borderColor: "#07575B",
+                      color: "#fff",
+                    }}
                   >
                     Ubah Cover
                   </button>

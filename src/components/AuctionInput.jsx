@@ -61,7 +61,7 @@ function AuctionInput({ onAddAuction }) {
               onChange={(e) => setDescription(e.target.value)}
               value={description}
               className="form-control"
-              rows="3"
+              rows="5"
               placeholder="Enter auction description"
               required
             ></textarea>
@@ -120,7 +120,15 @@ function AuctionInput({ onAddAuction }) {
             )}
           </div>
           <div className="text-end">
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{
+                backgroundColor: "#07575B",
+                borderColor: "#07575B",
+                color: "#fff",
+              }}
+            >
               Save Auction
             </button>
           </div>

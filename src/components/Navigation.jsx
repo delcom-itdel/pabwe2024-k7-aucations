@@ -53,7 +53,7 @@ function Navigation({
       transition: "background-color 0.2s",
     },
     dropdownItemHover: {
-      backgroundColor: "#66A5AD",
+      backgroundColor: "#07575B",
     },
   };
 
@@ -142,7 +142,11 @@ function Navigation({
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{ color: "#fff" }}
+                  style={{
+                    color: "#fff",
+                    backgroundColor: "#07575B",
+                    padding: "5px",
+                  }}
                 >
                   <img
                     className="nav-profile"

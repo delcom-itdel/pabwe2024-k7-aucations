@@ -10,10 +10,14 @@ a {
   width: 376px;
 }
 .nav-item {
+  padding: 0;
+  margin: 0;
   display: table-cell;
-  background: #0d6efd2e;
+  background: #07575b;
 }
 .nav-profile {
+  padding: 0;
+  margin: 0;
   border-radius: 50%;
   width: 36px;
 }
@@ -62,18 +66,18 @@ a {
 
 .card {
   border: 1px solid #ccc;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .title-card {
-  background-color: #4A7A82; 
+  background-color: #4a7a82;
   color: white;
   margin-bottom: 15px; /* Menambahkan jarak bawah */
 }
 
 .bid-date-card {
   background-color: white;
-  color: #4A7A82; 
+  color: #4a7a82;
   padding: 15px;
   margin-top: 15px; /* Menambahkan jarak antara judul dan bid */
 }
@@ -85,10 +89,8 @@ a {
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
-  top: 10px; 
-  right: 10px; 
+  top: 10px;
+  right: 10px;
   font-size: 14px;
   position: absolute;
 }
-
-
