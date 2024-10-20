@@ -38,7 +38,11 @@ function LoginInput({ onAuthLogin }) {
           />
         </div>
         <div className="mb-4 text-end">
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ backgroundColor: "#07575B" }}
+          >
             Login
           </button>
         </div>

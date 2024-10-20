@@ -52,11 +52,19 @@ function App() {
         <div className="w-300px mx-auto mt-5">
           <div className="card shadow-sm">
             <div className="text-center py-2">
-              <h2>Forum App</h2>
+              <h2>Aucations App</h2>
             </div>
             <ul className="nav nav-pills mb-3">
               <li className="nav-item w-50 text-center">
-                <Link className={`nav-link ${activeLogin} btl`} to="/">
+                <Link
+                  className={`nav-link ${activeLogin} btl`}
+                  to="/"
+                  style={{
+                    backgroundColor: activeLogin ? "#07575B" : "#D3D3D3",
+                    color: activeLogin ? "white" : "#07575B",
+                    borderRadius: "4px",
+                  }}
+                >
                   Login
                 </Link>
               </li>
@@ -64,11 +72,17 @@ function App() {
                 <Link
                   className={`nav-link ${activeRegister} btl`}
                   to="/register"
+                  style={{
+                    backgroundColor: activeRegister ? "#07575B" : "#D3D3D3",
+                    color: activeRegister ? "white" : "#07575B",
+                    borderRadius: "4px",
+                  }}
                 >
                   Register
                 </Link>
               </li>
             </ul>
+
             <Routes>
               <Route path="/*" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
