@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { FaTrash } from "react-icons/fa6"; // Icon untuk penghapusan
-import Swal from "sweetalert2"; // SweetAlert2 untuk dialog konfirmasi
+import { FaTrash } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 function AuctionItem({ auction, onDeleteAuction }) {
   const handleDelete = () => {
@@ -23,7 +23,7 @@ function AuctionItem({ auction, onDeleteAuction }) {
     });
   };
 
-  const MAX_DESCRIPTION_LENGTH = 100; // Batas panjang deskripsi
+  const MAX_DESCRIPTION_LENGTH = 100;
 
   const truncateDescription = (description) => {
     if (description.length > MAX_DESCRIPTION_LENGTH) {
@@ -33,37 +33,80 @@ function AuctionItem({ auction, onDeleteAuction }) {
   };
 
   return (
-    <div className="card mb-4" style={{ height: "500px" }}>
+    <div
+      className="card auction-item"
+      style={{
+        width: "100%",
+        minHeight: "500px",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        transition: "transform 0.2s, box-shadow 0.2s",
+        borderRadius: "0.5rem",
+      }}
+    >
       {auction.cover && (
         <img
           src={auction.cover}
           className="card-img-top"
           alt={auction.title}
-          style={{ width: "100%", height: "250px", objectFit: "cover" }}
+          style={{
+            width: "100%",
+            height: "250px",
+            objectFit: "cover",
+            borderRadius: "0.5rem 0.5rem 0 0",
+          }}
         />
       )}
-      <div className="card-body d-flex flex-column">
-        <Link to={`/auctions/${auction.id}`}>
-          <h5 className="card-title">{auction.title}</h5>
+      <div
+        className="card-body d-flex flex-column"
+        style={{ padding: "1rem", flexGrow: 1 }}
+      >
+        <Link to={`/auctions/${auction.id}`} className="text-decoration-none">
+          <h5
+            className="card-title"
+            style={{
+              fontSize: "1.25rem",
+              fontWeight: "bold",
+              color: "#000",
+              marginBottom: "0.75rem",
+            }}
+          >
+            {auction.title}
+          </h5>
         </Link>
 
-        <p className="card-text">{truncateDescription(auction.description)}</p>
-
-        <p className="card-text">Starting Bid: IDR {auction.start_bid}</p>
-        <p className="card-text">
-          Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
+        <p className="card-text" style={{ color: "#6c757d", flexGrow: 1 }}>
+          {truncateDescription(auction.description)}
         </p>
-        <p className="card-text">Total Bids: {auction.bids.length}</p>
 
-        {onDeleteAuction && (
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="btn btn-sm btn-outline-danger mt-2"
-          >
-            <FaTrash /> Hapus
-          </button>
-        )}
+        <div>
+          <p className="card-text" style={{ marginBottom: "0.5rem" }}>
+            <strong>Starting Bid:</strong> IDR {auction.start_bid}
+          </p>
+          <p className="card-text" style={{ marginBottom: "0.5rem" }}>
+            <strong>Closing Date:</strong>{" "}
+            {new Date(auction.closed_at).toLocaleDateString()}
+          </p>
+          <p className="card-text" style={{ marginBottom: "0.5rem" }}>
+            <strong>Total Bids:</strong> {auction.bids.length}
+          </p>
+
+          {onDeleteAuction && (
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="btn btn-sm btn-outline-danger"
+              style={{
+                border: "1px solid red",
+                backgroundColor: "transparent",
+                color: "red",
+              }}
+            >
+              <FaTrash /> Hapus
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

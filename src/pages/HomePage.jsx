@@ -26,9 +26,16 @@ function HomePage({ selectedAuctionType }) {
       : auctions;
 
   return (
-    <section>
-      <div className="container pt-4">
-        <h4>
+    <section style={{ padding: "2rem 0" }}>
+      <div className="container">
+        <h4
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: "2rem",
+            marginBottom: "2rem",
+          }}
+        >
           {selectedAuctionType === "myAuctions"
             ? "My Auctions"
             : selectedAuctionType === "otherAuctions"
@@ -38,7 +45,7 @@ function HomePage({ selectedAuctionType }) {
         {displayedAuctions.length > 0 ? (
           <AuctionList auctions={displayedAuctions} />
         ) : (
-          <p>No auctions available</p>
+          <p style={{ textAlign: "center" }}>No auctions available</p>
         )}
       </div>
     </section>
