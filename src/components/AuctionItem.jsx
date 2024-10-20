@@ -40,7 +40,7 @@ function AuctionItem({ auction, onDeleteAuction }) {
           <h5 className="card-title">{auction.title}</h5>
         </Link>
         <p className="card-text">{auction.description}</p>
-        <p className="card-text">Starting Bid: ${auction.start_bid}</p>
+        <p className="card-text">Starting Bid: IDR {auction.start_bid}</p>
         <p className="card-text">
           Closing Date: {new Date(auction.closed_at).toLocaleDateString()}
         </p>
