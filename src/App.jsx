@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { asyncPreloadProcess } from "./states/isPreload/action";
@@ -20,15 +20,27 @@ function App() {
   );
   const location = useLocation();
   const dispatch = useDispatch();
+
+  // Menambahkan state untuk Auction type
+  const [selectedAuctionType, setSelectedAuctionType] = useState("allAuctions");
+
   useEffect(() => {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
+
   const onAuthSignOut = () => {
     dispatch(asyncUnsetAuthLogin());
   };
+
+  // Menambahkan handler untuk mengubah tipe lelang (auctions)
+  const handleAuctionTypeChange = (type) => {
+    setSelectedAuctionType(type);
+  };
+
   if (isPreload) {
     return null;
   }
+
   if (authLogin === null) {
     const activeRegister = location.pathname === "/register" ? "active" : "";
     const activeLogin = location.pathname !== "/register" ? "active" : "";
@@ -66,17 +78,31 @@ function App() {
       </div>
     );
   }
+
   return (
     <>
       <div>
         <header className="fixed-top">
-          <Navigation authLogin={authLogin} onAuthSignOut={onAuthSignOut} />
+          <Navigation
+            authLogin={authLogin}
+            onAuthSignOut={onAuthSignOut}
+            selectedAuctionType={selectedAuctionType} // Mengirim state ke Navigation
+            onAuctionTypeChange={handleAuctionTypeChange} // Handler perubahan tipe
+          />
           <Loading />
         </header>
         <main className="margin-main">
           <Routes>
             <Route path="/*" element={<NotFoundPage />} />
-            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  selectedAuctionType={selectedAuctionType} // Kirim tipe lelang ke HomePage
+                  onAuctionTypeChange={handleAuctionTypeChange} // Handler untuk perubahan
+                />
+              }
+            />
             <Route path="/users/me" element={<ProfilePage />} />
             <Route path="/auctions/add" element={<AuctionAddPage />} />
             <Route path="/auctions/:id" element={<AuctionDetailPage />} />
@@ -87,4 +113,5 @@ function App() {
     </>
   );
 }
+
 export default App;
