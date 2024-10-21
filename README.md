@@ -1,21 +1,13 @@
 # Kelompok 7 - Aucations
 
-| NIM      | Nama               |        
-| -------- | ------------------ |        
-| 11S22046 | Dian Gulo          |       
-| 11S22017 | Dwilady Pandiangan |       
-| 11S22054 | Charlos Purba      |        
-| 11S22036 | Rohit Panjaitan    |       
-| 11S22004 | Pangeran Simamora  |        
+|    NIM   |       Nama         |    Username      |
+| -------- | ------------------ |------------------| 
+| 11S22046 | Dian Gulo          | diangrecia       |  
+| 11S22017 | Dwilady Pandiangan | dreamyyily       |  
+| 11S22054 | Charlos Purba      | charlospurba     |
+| 11S22036 | Rohit Panjaitan    | mitsuha19        |
+| 11S22004 | Pangeran Simamora  | DarkblueRizzler  |     
 
-
-|    Username    |  Nama                 |
-|----------------|---------------------- |
-| diangrecia     | Dian Gulo             |
-| dreamyyily     | Dwilady Pandiangan    |
-| charlospurba   | Charlos Purba         |
-| mitsuha19      | Rohit Panjaitan       |
-| DarkblueRizzler| Pangeran Simamora     |
 
 
 ## Logs
@@ -66,3 +58,6 @@
 ### [21-10-2024]
 - Meratakan warna Button, Profil dan Lebar Deskripsi (11S22017 - Dwi Lady Pandiangan)
 - Memperbaiki Kondisi add Bid (11S22004 - Pangeran Simamora)
+- Meng-update Navigasi (11S22054 - Charlos Purba)
+- Pesan Sukses dan Delete serta Drop Down (11S22017 - Dwi Lady Pandiangan)
+- Meng-Update DetailUser (11S22046 - Dian Grecia Natalie Gulo)
