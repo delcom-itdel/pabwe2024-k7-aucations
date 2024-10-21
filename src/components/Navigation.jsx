@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FaPlus, FaUser, FaRightFromBracket, FaGavel } from "react-icons/fa6";
+import { useState } from "react";
 
 function Navigation({
   authLogin,
@@ -9,6 +10,18 @@ function Navigation({
   onAuctionTypeChange,
 }) {
   const { id, name, photo } = authLogin;
+
+  const [activeButton, setActiveButton] = useState(null);
+
+  const handleMouseDown = (buttonType) => {
+    setActiveButton(buttonType);
+  };
+
+  const handleMouseUp = () => {
+    setActiveButton(null);
+  };
+
+  const isActive = (buttonType) => activeButton === buttonType;
 
   const styles = {
     navbar: {
@@ -22,18 +35,18 @@ function Navigation({
       fontSize: "1.5rem",
       margin: "0 20px",
     },
-    button: {
-      backgroundColor: "#fff",
-      color: "#07575B",
+    dropdownButton: {
+      backgroundColor: "#07575B",
+      color: "#fff",
       border: "none",
-      borderRadius: "20px",
       padding: "0.5rem 1rem",
-      marginRight: "10px",
-      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      transition: "all 0.3s",
+      borderRadius: "5px",
+      display: "flex",
+      alignItems: "center",
     },
-    buttonHover: {
-      backgroundColor: "#e0e0e0",
+    buttonActive: {
+      backgroundColor: "#66A5AD",
+      color: "#fff",
     },
     profileImg: {
       borderRadius: "50%",
@@ -49,11 +62,23 @@ function Navigation({
     dropdownItem: {
       color: "#fff",
       padding: "10px 20px",
+      backgroundColor: "transparent",
       textDecoration: "none",
       transition: "background-color 0.2s",
     },
     dropdownItemHover: {
-      backgroundColor: "#07575B",
+      backgroundColor: "#66A5AD",
+    },
+    dropdownItemActive: {
+      backgroundColor: "#66A5AD",
+    },
+    // Tambahkan gaya untuk tombol "Add New Auctions"
+    addNewButton: {
+      backgroundColor: "#f8f9fa",
+      color: "#343a40",
+      border: "1px solid #dee2e6",
+      borderRadius: "20px", // Membuat ujung tombol agak bulat
+      padding: "0.375rem 0.75rem", // Atur padding agar tombol nyaman
     },
   };
 
@@ -65,24 +90,33 @@ function Navigation({
           <div className="mx-4">
             <div className="dropdown">
               <button
-                className="btn btn-light dropdown-toggle"
+                className="btn dropdown-toggle"
                 type="button"
                 id="auctionTypeDropdown"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                style={styles.dropdownButton}
               >
-                <FaGavel /> {/* Using only the icon */}
+                <FaGavel style={{ color: "#fff" }} />
               </button>
               <ul
                 className="dropdown-menu"
                 aria-labelledby="auctionTypeDropdown"
+                style={styles.dropdownMenu}
               >
                 <li>
                   <button
                     className={`dropdown-item ${
                       selectedAuctionType === "allAuctions" ? "active" : ""
                     }`}
+                    style={
+                      isActive("allAuctions")
+                        ? styles.dropdownItemActive
+                        : styles.dropdownItem
+                    }
                     onClick={() => onAuctionTypeChange("allAuctions")}
+                    onMouseDown={() => handleMouseDown("allAuctions")}
+                    onMouseUp={handleMouseUp}
                   >
                     All Auctions
                   </button>
@@ -92,7 +126,14 @@ function Navigation({
                     className={`dropdown-item ${
                       selectedAuctionType === "myAuctions" ? "active" : ""
                     }`}
+                    style={
+                      isActive("myAuctions")
+                        ? styles.dropdownItemActive
+                        : styles.dropdownItem
+                    }
                     onClick={() => onAuctionTypeChange("myAuctions")}
+                    onMouseDown={() => handleMouseDown("myAuctions")}
+                    onMouseUp={handleMouseUp}
                   >
                     My Auctions
                   </button>
@@ -102,7 +143,14 @@ function Navigation({
                     className={`dropdown-item ${
                       selectedAuctionType === "otherAuctions" ? "active" : ""
                     }`}
+                    style={
+                      isActive("otherAuctions")
+                        ? styles.dropdownItemActive
+                        : styles.dropdownItem
+                    }
                     onClick={() => onAuctionTypeChange("otherAuctions")}
+                    onMouseDown={() => handleMouseDown("otherAuctions")}
+                    onMouseUp={handleMouseUp}
                   >
                     Other Auctions
                   </button>
@@ -121,15 +169,7 @@ function Navigation({
                 <Link
                   className="btn btn-light btn-sm text-dark"
                   to="/auctions/add"
-                  style={styles.button}
-                  onMouseOver={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.buttonHover.backgroundColor)
-                  }
-                  onMouseOut={(e) =>
-                    (e.currentTarget.style.backgroundColor =
-                      styles.button.backgroundColor)
-                  }
+                  style={styles.addNewButton} // Ganti gaya tombol Add New Auctions
                 >
                   <FaPlus /> Add New Auctions
                 </Link>
@@ -142,11 +182,7 @@ function Navigation({
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{
-                    color: "#fff",
-                    backgroundColor: "#07575B",
-                    padding: "5px",
-                  }}
+                  style={{ color: "#fff" }}
                 >
                   <img
                     className="nav-profile"
@@ -173,6 +209,8 @@ function Navigation({
                       onMouseOut={(e) =>
                         (e.currentTarget.style.backgroundColor = "transparent")
                       }
+                      onMouseDown={() => handleMouseDown("profile")}
+                      onMouseUp={handleMouseUp}
                     >
                       <FaUser /> Profile
                     </Link>
@@ -190,6 +228,8 @@ function Navigation({
                       onMouseOut={(e) =>
                         (e.currentTarget.style.backgroundColor = "transparent")
                       }
+                      onMouseDown={() => handleMouseDown("signout")}
+                      onMouseUp={handleMouseUp}
                     >
                       <FaRightFromBracket /> Sign out
                     </button>
