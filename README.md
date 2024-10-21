@@ -61,3 +61,5 @@
 - Meng-update Navigasi (11S22054 - Charlos Purba)
 - Pesan Sukses dan Delete serta Drop Down (11S22017 - Dwi Lady Pandiangan)
 - Meng-Update DetailUser (11S22046 - Dian Grecia Natalie Gulo)
+- Membuat Animasi Card (11S22017 - Dwi Lady Pandiangan)
+- Membuat Gretings Card User pada HomePage (11S22046 - Dian Grecia Natalie Gulo)
