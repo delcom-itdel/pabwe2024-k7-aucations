@@ -2,6 +2,7 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import { formatDate } from "../utils/tools";
 import { FaUpload } from "react-icons/fa6";
+
 function UserDetail({ authLogin, onUserChangePhoto }) {
   const fileInputRef = useRef(null);
   const handleFileChange = (event) => {
@@ -13,6 +14,7 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };
+
   return (
     <div id={authLogin.id} className="card">
       <div className="card-body">
@@ -25,15 +27,17 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
                   width={76}
                   height={76}
                   src={authLogin.photo}
+                  alt="Profile"
                 />
               </div>
               <div className="ms-3">
-                <h3 className="text-primary">{authLogin.name}</h3>
+                <h3 style={{ color: "#07575B" }}>{authLogin.name}</h3>
                 <button
-                  className="btn btn-sm btn-outline-primary"
+                  className="btn btn-sm"
                   onClick={handleUploadClick}
+                  style={{ color: "#07575B", backgroundColor: "white" , border: "2px solid #07575B" }} // Mengubah warna tombol
                 >
-                  <FaUpload /> Ubah Photo Profile
+                  <FaUpload /> Change Photo Profile
                 </button>
                 <input
                   ref={fileInputRef}
@@ -48,15 +52,15 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
             <table className="table table-bordered">
               <tbody>
                 <tr>
-                  <th>Nama</th>
+                  <th>Name</th>
                   <td>{authLogin.name}</td>
                 </tr>
                 <tr>
-                  <th>Email</th>
+                  <th>E-mail</th>
                   <td>{authLogin.email}</td>
                 </tr>
                 <tr>
-                  <th>Bergabung sejak</th>
+                  <th>Joined since</th>
                   <td>{formatDate(authLogin.created_at)}</td>
                 </tr>
               </tbody>
@@ -67,16 +71,19 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
     </div>
   );
 }
+
 const authLoginShape = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
 };
+
 UserDetail.propTypes = {
   authLogin: PropTypes.shape(authLoginShape).isRequired,
   onUserChangePhoto: PropTypes.func.isRequired,
 };
+
 // eslint-disable-next-line react-refresh/only-export-components
 export { authLoginShape };
 export default UserDetail;
