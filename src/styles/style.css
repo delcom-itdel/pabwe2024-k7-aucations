@@ -1,29 +1,53 @@
-/* CSS yang sudah ada */
+@keyframes fade-zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card-body h5 {
+  animation: fade-zoom 3s ease-in-out forwards; 
+}
+
 body {
   background-color: #e8e8e8;
   margin-bottom: 50px;
 }
+
 a {
   text-decoration: none;
 }
+
 .w-300px {
   width: 376px;
 }
+
 .nav-item {
   padding: 0;
   margin: 0;
   display: table-cell;
   background: #07575b;
 }
+
 .nav-profile {
   padding: 0;
   margin: 0;
   border-radius: 50%;
   width: 36px;
 }
+
 .margin-main {
   margin-top: 80px;
 }
+
 .loading {
   position: relative;
   overflow: hidden !important;
@@ -31,6 +55,7 @@ a {
   height: 100vh;
   background-color: #e8e8e8;
 }
+
 .loader {
   position: absolute;
   margin: 0 auto;
@@ -48,12 +73,14 @@ a {
     linear-gradient(currentColor 50%, #0000 0) 50%/4px 60% no-repeat;
   animation: l1 2s infinite linear;
 }
+
 .loader:before {
   content: "";
   flex: 1;
   background: linear-gradient(currentColor 50%, #0000 0) 50%/4px 80% no-repeat;
   animation: inherit;
 }
+
 @keyframes l1 {
   100% {
     transform: rotate(1turn);
@@ -72,14 +99,14 @@ a {
 .title-card {
   background-color: #4a7a82;
   color: white;
-  margin-bottom: 15px; /* Menambahkan jarak bawah */
+  margin-bottom: 15px;
 }
 
 .bid-date-card {
   background-color: white;
   color: #4a7a82;
   padding: 15px;
-  margin-top: 15px; /* Menambahkan jarak antara judul dan bid */
+  margin-top: 15px;
 }
 
 .view-button {
@@ -94,3 +121,4 @@ a {
   font-size: 14px;
   position: absolute;
 }
+
