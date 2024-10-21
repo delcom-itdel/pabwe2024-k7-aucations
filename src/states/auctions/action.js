@@ -86,6 +86,8 @@ function asyncAddAuction(
         cover,
       });
       dispatch(addAuctionActionCreator(true));
+      Swal.fire("Success", "Auction updated successfully", "success");
+
       navigate("/"); // Redirect to homepage after successful addition
     } catch (error) {
       showErrorDialog(error.message);
@@ -104,6 +106,7 @@ function asyncDeleteAuction(id) {
       showErrorDialog(error.message);
     }
     dispatch(hideLoading());
+    Swal.fire("Success", "Auction delete successfully", "success");
   };
 }
 

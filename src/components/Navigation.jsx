@@ -77,8 +77,8 @@ function Navigation({
       backgroundColor: "#f8f9fa",
       color: "#343a40",
       border: "1px solid #dee2e6",
-      borderRadius: "20px", // Membuat ujung tombol agak bulat
-      padding: "0.375rem 0.75rem", // Atur padding agar tombol nyaman
+      borderRadius: "20px",
+      padding: "0.375rem 0.75rem",
     },
   };
 
@@ -115,6 +115,16 @@ function Navigation({
                         : styles.dropdownItem
                     }
                     onClick={() => onAuctionTypeChange("allAuctions")}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "rgba(255, 255, 255, 0.2)";
+                      e.currentTarget.style.color = "#fff";
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        styles.dropdownItem.backgroundColor;
+                      e.currentTarget.style.color = "#fff";
+                    }}
                     onMouseDown={() => handleMouseDown("allAuctions")}
                     onMouseUp={handleMouseUp}
                   >
@@ -132,6 +142,16 @@ function Navigation({
                         : styles.dropdownItem
                     }
                     onClick={() => onAuctionTypeChange("myAuctions")}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "rgba(255, 255, 255, 0.2)";
+                      e.currentTarget.style.color = "#fff";
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        styles.dropdownItem.backgroundColor;
+                      e.currentTarget.style.color = "#fff";
+                    }}
                     onMouseDown={() => handleMouseDown("myAuctions")}
                     onMouseUp={handleMouseUp}
                   >
@@ -149,6 +169,16 @@ function Navigation({
                         : styles.dropdownItem
                     }
                     onClick={() => onAuctionTypeChange("otherAuctions")}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        "rgba(255, 255, 255, 0.2)";
+                      e.currentTarget.style.color = "#fff";
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.backgroundColor =
+                        styles.dropdownItem.backgroundColor;
+                      e.currentTarget.style.color = "#fff";
+                    }}
                     onMouseDown={() => handleMouseDown("otherAuctions")}
                     onMouseUp={handleMouseUp}
                   >
@@ -243,7 +273,6 @@ function Navigation({
     </div>
   );
 }
-
 
 const authLoginShape = {
   id: PropTypes.number.isRequired,

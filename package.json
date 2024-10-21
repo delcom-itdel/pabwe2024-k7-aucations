@@ -17,7 +17,7 @@
     "react-redux": "^9.1.2",
     "react-redux-loading-bar": "^5.0.8",
     "react-router-dom": "^6.27.0",
-    "sweetalert2": "^11.14.3"
+    "sweetalert2": "^11.14.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
