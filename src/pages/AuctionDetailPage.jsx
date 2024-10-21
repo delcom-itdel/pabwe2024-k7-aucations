@@ -75,18 +75,58 @@ function AuctionDetailPage() {
   };
 
   const handleAddBid = async () => {
-    if (bidAmount > 0) {
-      // Tambahkan bid dan tunggu hingga selesai
-      await dispatch(asyncAddBid({ id, bid: bidAmount }));
+    const currentDateTime = new Date();
+    const closedDateTime = new Date(detailAuction.closed_at);
+    const startBid = detailAuction.start_bid;
+    const highestBid = detailAuction?.bids.length
+      ? Math.max(...detailAuction.bids.map((bid) => bid.bid))
+      : startBid;
 
-      // Tampilkan pesan sukses
-      Swal.fire("Success", "Bid successfully added", "success");
-
-      // Memuat ulang detail lelang untuk menampilkan data terbaru
-      await dispatch(asyncDetailAuction(id));
-    } else {
-      Swal.fire("Error", "Please enter a valid bid amount", "error");
+    // Validasi bid
+    if (bidAmount <= 0) {
+      Swal.fire(
+        "Ups, Ada yang salah",
+        "Please enter a valid bid amount",
+        "error"
+      );
+      return;
     }
+
+    if (bidAmount <= highestBid) {
+      Swal.fire(
+        "Ups, Ada yang salah",
+        "Bid harus lebih tinggi dari bid tertinggi saat ini",
+        "error"
+      );
+      return;
+    }
+
+    if (bidAmount <= startBid) {
+      Swal.fire(
+        "Ups, Ada yang salah",
+        "Bid harus lebih tinggi dari start bid",
+        "error"
+      );
+      return;
+    }
+
+    if (currentDateTime > closedDateTime) {
+      Swal.fire(
+        "Ups, Ada yang salah",
+        "Lelang sudah ditutup, tidak bisa menambahkan bid",
+        "error"
+      );
+      return;
+    }
+
+    // Jika semua validasi berhasil, tambahkan bid
+    await dispatch(asyncAddBid({ id, bid: bidAmount }));
+
+    // Tampilkan pesan sukses
+    Swal.fire("Success", "Bid successfully added", "success");
+
+    // Memuat ulang detail lelang untuk menampilkan data terbaru
+    await dispatch(asyncDetailAuction(id));
   };
 
   const handleDeleteBid = () => {
