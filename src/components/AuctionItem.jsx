@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import "../styles/auctionItem.css";
 
 function AuctionItem({ auction, onDeleteAuction }) {
   const handleDelete = () => {
