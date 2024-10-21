@@ -1,12 +1,22 @@
 # Kelompok 7 - Aucations
 
-| NIM      | Nama               |
-| -------- | ------------------ |
-| 11S22046 | Dian Gulo          |
-| 11S22017 | Dwilady Pandiangan |
-| 11S22054 | Charlos Purba      |
-| 11S22036 | Rohit Panjaitan    |
-| 11S22004 | Pangeran Simamora  |
+| NIM      | Nama               |        
+| -------- | ------------------ |        
+| 11S22046 | Dian Gulo          |       
+| 11S22017 | Dwilady Pandiangan |       
+| 11S22054 | Charlos Purba      |        
+| 11S22036 | Rohit Panjaitan    |       
+| 11S22004 | Pangeran Simamora  |        
+
+
+|    Username    |  Nama                 |
+|----------------|---------------------- |
+| diangrecia     | Dian Gulo             |
+| dreamyyily     | Dwilady Pandiangan    |
+| charlospurba   | Charlos Purba         |
+| mitsuha19      | Rohit Panjaitan       |
+| DarkblueRizzler| Pangeran Simamora     |
+
 
 ## Logs
 
@@ -34,3 +44,25 @@
 - Menampilkan cover, dan mumunculkan detail auction (11S22036 - Rohit Panjaitan)
 - Menambahkan Fitur Delete (11S22054 - Charlos Purba)
 - Menambah Fitur Edit (11S22036 - Rohit Panjaitan)
+- Menambah fitur change cover (11S22036 - Rohit Panjaitan)
+- Menambah fitur add bid dan delete bid (11S22036 - Rohit Panjaitan)
+- Meng-uodate navigasi (11S22054 - Charlos Purba)
+- Mengubah detail update (11S22054 - Charlos Purba)
+- Mengupdate style (11S22054 - Charlos Purba)
+- Memperbaiki tampilan detail (11S22046 - Dian Grecia Natalie Gulo)
+- Memperbaharui tampilan AucationInput (11S22046 - Dian Grecia Natalie Gulo)
+- Merapikan tampilan Input (11S22046 - Dian Grecia Natalie Gulo)
+- Memperbaiki tampilan Foto (11S22017 - Dwi Lady Pandiangan)
+- 
+### [20-10-2024]
+- Meratakan ukuran gambar dan menambah view gambar (11S22017 - Dwi Lady Pandiangan)
+- Mengupdate Item dan HomePage (11S22054 - Charlos Purba)
+- Menambahkan fitur menu Aucation (11S22054 - Charlos Purba)
+- Mempercantik tampilan detail dan memperbaharui css yang berhubungan dengan detail di style (11S22046 - Dian Grecia Natalie Gulo)
+- Memperbaiki tampilan HomePage di AucationItem (11S22046 - Dian Grecia Natalie Gulo)
+- Meng-Update Login dan Register (11S22054 - Charlos Purba)
+- Meng-Update new HomePage (11S22054 - Charlos Purba)
+
+### [21-10-2024]
+- Meratakan warna Button, Profil dan Lebar Deskripsi (11S22017 - Dwi Lady Pandiangan)
+- Memperbaiki Kondisi add Bid (11S22004 - Pangeran Simamora)
