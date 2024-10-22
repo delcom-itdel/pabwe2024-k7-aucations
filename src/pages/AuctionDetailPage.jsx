@@ -82,20 +82,22 @@ function AuctionDetailPage() {
       ? Math.max(...detailAuction.bids.map((bid) => bid.bid))
       : startBid;
 
+    if (detailAuction.bids.length > 0) {
+      if (bidAmount <= highestBid) {
+        Swal.fire(
+          "Ups, something went wrong",
+          "The bid must be HIGHER than the highest bid",
+          "error"
+        );
+        return;
+      }
+    }
+
     // Validasi bid
     if (bidAmount <= 0) {
       Swal.fire(
         "Ups, something wrong",
         "Please enter a valid bid amount",
-        "error"
-      );
-      return;
-    }
-
-    if (bidAmount <= highestBid) {
-      Swal.fire(
-        "Ups, something went wrong",
-        "The bid must be HIGHER than the highest bid",
         "error"
       );
       return;
