@@ -8,8 +8,8 @@ import {
 } from "../states/auctions/action";
 
 function AuctionEditPage() {
-  const { id } = useParams(); // Dapatkan id dari URL
-  const navigate = useNavigate(); // Initialize navigate
+  const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { detailAuction } = useSelector((state) => state);
@@ -21,7 +21,7 @@ function AuctionEditPage() {
 
   useEffect(() => {
     if (id) {
-      dispatch(asyncDetailAuction(id)); // Ambil detail auction untuk diedit
+      dispatch(asyncDetailAuction(id));
     }
   }, [id, dispatch]);
 
@@ -30,7 +30,7 @@ function AuctionEditPage() {
       setTitle(detailAuction.title);
       setDescription(detailAuction.description);
       setStartBid(detailAuction.start_bid);
-      setClosedAt(detailAuction.closed_at); // Inisialisasi closed_at
+      setClosedAt(detailAuction.closed_at);
     }
   }, [detailAuction]);
 
@@ -45,7 +45,7 @@ function AuctionEditPage() {
           start_bid: startBid,
           closed_at: closedAt,
         },
-        navigate // Pass navigate as an argument
+        navigate
       )
     );
   };

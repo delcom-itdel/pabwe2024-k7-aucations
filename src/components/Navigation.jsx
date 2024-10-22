@@ -72,7 +72,7 @@ function Navigation({
     dropdownItemActive: {
       backgroundColor: "#66A5AD",
     },
-    // Tambahkan gaya untuk tombol "Add New Auctions"
+    // Gaya untuk tombol "Add New Auctions"
     addNewButton: {
       backgroundColor: "#f8f9fa",
       color: "#343a40",
@@ -199,7 +199,7 @@ function Navigation({
                 <Link
                   className="btn btn-light btn-sm text-dark"
                   to="/auctions/add"
-                  style={styles.addNewButton} // Ganti gaya tombol Add New Auctions
+                  style={styles.addNewButton}
                 >
                   <FaPlus /> Add New Auctions
                 </Link>

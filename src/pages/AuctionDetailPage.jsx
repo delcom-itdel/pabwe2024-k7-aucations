@@ -9,7 +9,7 @@ import {
   asyncDeleteBid,
 } from "../states/auctions/action";
 import AuctionDetail from "../components/AuctionDetail";
-import Swal from "sweetalert2"; // SweetAlert for confirmation dialogs
+import Swal from "sweetalert2";
 
 function AuctionDetailPage() {
   const { id } = useParams();
@@ -33,11 +33,11 @@ function AuctionDetailPage() {
 
   const handleDelete = () => {
     Swal.fire({
-      title: "Hapus Lelang",
-      text: `Apakah kamu yakin ingin menghapus lelang: ${detailAuction.title}?`,
+      title: "Delete Auction",
+      text: `Are you sure to delete this auction : ${detailAuction.title}?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Ya, Tetap Hapus",
+      confirmButtonText: "Yes, delete auction",
       customClass: {
         confirmButton: "btn btn-danger me-3 mb-4",
         cancelButton: "btn btn-secondary mb-4",
@@ -46,7 +46,7 @@ function AuctionDetailPage() {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(asyncDeleteAuction(id));
-        navigate("/"); // Navigate back to homepage after deletion
+        navigate("/"); // Navigate kembali ke halaman utama sesudah delete
       }
     });
   };
@@ -85,7 +85,7 @@ function AuctionDetailPage() {
     // Validasi bid
     if (bidAmount <= 0) {
       Swal.fire(
-        "Ups, Ada yang salah",
+        "Ups, something wrong",
         "Please enter a valid bid amount",
         "error"
       );
@@ -94,8 +94,8 @@ function AuctionDetailPage() {
 
     if (bidAmount <= highestBid) {
       Swal.fire(
-        "Ups, Ada yang salah",
-        "Bid harus lebih tinggi dari bid tertinggi saat ini",
+        "Ups, something went wrong",
+        "The bid must be HIGHER than the highest bid",
         "error"
       );
       return;
@@ -103,8 +103,8 @@ function AuctionDetailPage() {
 
     if (bidAmount <= startBid) {
       Swal.fire(
-        "Ups, Ada yang salah",
-        "Bid harus lebih tinggi dari start bid",
+        "Ups, something went wrong",
+        "The bid must be HIGHER than the starting bid",
         "error"
       );
       return;
@@ -112,8 +112,8 @@ function AuctionDetailPage() {
 
     if (currentDateTime > closedDateTime) {
       Swal.fire(
-        "Ups, Ada yang salah",
-        "Lelang sudah ditutup, tidak bisa menambahkan bid",
+        "Ups, something went wrong",
+        "The auction is CLOSED, you can't place a bid",
         "error"
       );
       return;
@@ -122,7 +122,6 @@ function AuctionDetailPage() {
     // Jika semua validasi berhasil, tambahkan bid
     await dispatch(asyncAddBid({ id, bid: bidAmount }));
 
-    // Tampilkan pesan sukses
     Swal.fire("Success", "Bid successfully added", "success");
 
     // Memuat ulang detail lelang untuk menampilkan data terbaru
@@ -131,11 +130,11 @@ function AuctionDetailPage() {
 
   const handleDeleteBid = () => {
     Swal.fire({
-      title: "Hapus Tawaran",
-      text: `Apakah kamu yakin ingin menghapus tawaranmu pada lelang ini?`,
+      title: "Delete Bid",
+      text: `Are you sure to delete your bid on this auction?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Ya, Hapus Tawaran",
+      confirmButtonText: "Yes, delete bid",
       customClass: {
         confirmButton: "btn btn-danger me-3 mb-4",
         cancelButton: "btn btn-secondary mb-4",
@@ -166,18 +165,18 @@ function AuctionDetailPage() {
             <AuctionDetail auction={detailAuction} />
             {highestBid !== null && (
               <div className="mt-3">
-                <h5>Bid Tertinggi: Rp {highestBid.toLocaleString()}</h5>
+                <h5>Highest Bid: Rp {highestBid.toLocaleString()}</h5>
               </div>
             )}
 
             {myBid !== null && (
               <div className="mt-3">
-                <h5>Tawaran Anda: Rp {myBid.toLocaleString()}</h5>
+                <h5>Your Bid: Rp {myBid.toLocaleString()}</h5>
                 <button
                   onClick={handleDeleteBid}
                   className="btn btn-danger mt-2"
                 >
-                  Hapus Tawaran
+                  Delete Bid
                 </button>
               </div>
             )}
@@ -189,7 +188,7 @@ function AuctionDetailPage() {
                   onClick={handleDelete}
                   className="btn btn-danger mt-3"
                 >
-                  Hapus Lelang
+                  Delete Auction
                 </button>
                 <Link
                   to={`/auctions/edit/${id}`}
@@ -200,13 +199,13 @@ function AuctionDetailPage() {
                     color: "#fff",
                   }}
                 >
-                  Edit Lelang
+                  Edit Auction
                 </Link>
 
                 {/* Input untuk mengganti cover */}
                 <div className="mb-3 mt-3">
                   <label htmlFor="coverInput" className="form-label">
-                    Ubah Cover Lelang:
+                    Change Auction Cover:
                   </label>
                   <input
                     type="file"
@@ -223,22 +222,22 @@ function AuctionDetailPage() {
                       color: "#fff",
                     }}
                   >
-                    Ubah Cover
+                    Change Cover
                   </button>
                 </div>
               </>
             ) : (
               <div className="mt-3">
-                <h5>Tambah Tawaran</h5>
+                <h5>Increase Bid</h5>
                 <input
                   type="number"
                   className="form-control"
                   value={bidAmount}
                   onChange={(e) => setBidAmount(e.target.value)}
-                  placeholder="Masukkan jumlah tawaran"
+                  placeholder="Enter bid amount"
                 />
                 <button onClick={handleAddBid} className="btn btn-success mt-2">
-                  Tambah Bid
+                  Place Bid
                 </button>
               </div>
             )}

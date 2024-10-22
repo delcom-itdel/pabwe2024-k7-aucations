@@ -1,10 +1,13 @@
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa6";
 import Swal from "sweetalert2";
-import "../styles/auctionItem.css";
 
 function AuctionItem({ auction, onDeleteAuction }) {
+  // Tambahkan state untuk hover
+  const [isHovered, setIsHovered] = useState(false);
+
   const handleDelete = () => {
     Swal.fire({
       title: "Hapus Lelang",
@@ -36,13 +39,19 @@ function AuctionItem({ auction, onDeleteAuction }) {
   return (
     <div
       className="card auction-item"
+      // Event handlers untuk hover
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
         width: "100%",
         minHeight: "500px",
         display: "flex",
         flexDirection: "column",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        boxShadow: isHovered
+          ? "0 6px 20px rgba(7, 87, 91, 0.8)"
+          : "0 4px 12px rgba(0, 0, 0, 0.1)",
         transition: "transform 0.2s, box-shadow 0.2s",
+        transform: isHovered ? "scale(1.05)" : "scale(1)",
         borderRadius: "0.5rem",
       }}
     >
@@ -71,6 +80,7 @@ function AuctionItem({ auction, onDeleteAuction }) {
               fontWeight: "bold",
               color: "#000",
               marginBottom: "0.75rem",
+              textAlign: "center",
             }}
           >
             {auction.title}

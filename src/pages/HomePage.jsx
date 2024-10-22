@@ -28,7 +28,7 @@ function HomePage({ selectedAuctionType }) {
   return (
     <section style={{ padding: "2rem 0" }}>
       <div className="container">
-        {/* Greeting Card for logged-in users */}
+        {/* Greeting Card*/}
         {authLogin && (
           <div
             className="card mb-4"
@@ -38,17 +38,19 @@ function HomePage({ selectedAuctionType }) {
               boxShadow: "0 8px 24px rgba(0, 0, 0, 0.15)",
               backgroundColor: "#f8f9fa",
               transition: "transform 0.3s, box-shadow 0.3s",
-              display: "flex", 
-              flexDirection: "row", 
-              alignItems: "center", 
-              justifyContent: "space-between", 
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
               padding: "2rem",
             }}
           >
             {/* Left Image */}
-            <div style={{ flex: "1", display: "flex", justifyContent: "center" }}>
+            <div
+              style={{ flex: "1", display: "flex", justifyContent: "center" }}
+            >
               <img
-                src="/assets/stiker2.jpg" 
+                src="/assets/stiker2.jpg"
                 alt="Left Image"
                 style={{
                   width: "150px",
@@ -95,14 +97,16 @@ function HomePage({ selectedAuctionType }) {
                   color: "#343a40",
                 }}
               >
-                Happy bidding! 
+                Happy Bidding!
               </p>
             </div>
 
             {/* Right Image */}
-            <div style={{ flex: "1", display: "flex", justifyContent: "center" }}>
+            <div
+              style={{ flex: "1", display: "flex", justifyContent: "center" }}
+            >
               <img
-                src="/assets/stiker1.jpg" 
+                src="/assets/stiker1.jpg"
                 alt="Right Image"
                 style={{
                   width: "150px",

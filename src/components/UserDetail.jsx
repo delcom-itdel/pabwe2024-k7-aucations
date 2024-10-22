@@ -35,7 +35,11 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
                 <button
                   className="btn btn-sm"
                   onClick={handleUploadClick}
-                  style={{ color: "#07575B", backgroundColor: "white" , border: "2px solid #07575B" }} // Mengubah warna tombol
+                  style={{
+                    color: "#07575B",
+                    backgroundColor: "white",
+                    border: "2px solid #07575B",
+                  }}
                 >
                   <FaUpload /> Change Photo Profile
                 </button>
@@ -84,6 +88,5 @@ UserDetail.propTypes = {
   onUserChangePhoto: PropTypes.func.isRequired,
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { authLoginShape };
 export default UserDetail;
