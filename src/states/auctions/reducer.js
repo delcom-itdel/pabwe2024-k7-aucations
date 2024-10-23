@@ -37,7 +37,7 @@ function detailAuctionReducer(auction = null, action = {}) {
     case ActionType.ADD_BID:
       return {
         ...auction,
-        bids: [...auction.bids, action.payload.bid], // Tambahkan bid baru ke dalam array bids
+        bids: [...auction.bids, action.payload.bid],
       };
 
     default:

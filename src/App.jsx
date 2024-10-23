@@ -100,8 +100,8 @@ function App() {
           <Navigation
             authLogin={authLogin}
             onAuthSignOut={onAuthSignOut}
-            selectedAuctionType={selectedAuctionType} // Mengirim state ke Navigation
-            onAuctionTypeChange={handleAuctionTypeChange} // Handler perubahan tipe
+            selectedAuctionType={selectedAuctionType}
+            onAuctionTypeChange={handleAuctionTypeChange}
           />
           <Loading />
         </header>
@@ -112,8 +112,8 @@ function App() {
               path="/"
               element={
                 <HomePage
-                  selectedAuctionType={selectedAuctionType} // Kirim tipe lelang ke HomePage
-                  onAuctionTypeChange={handleAuctionTypeChange} // Handler untuk perubahan
+                  selectedAuctionType={selectedAuctionType}
+                  onAuctionTypeChange={handleAuctionTypeChange}
                 />
               }
             />

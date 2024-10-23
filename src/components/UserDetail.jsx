@@ -5,6 +5,7 @@ import { FaUpload } from "react-icons/fa6";
 
 function UserDetail({ authLogin, onUserChangePhoto }) {
   const fileInputRef = useRef(null);
+  
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {

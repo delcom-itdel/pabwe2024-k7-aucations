@@ -31,7 +31,7 @@ function AuctionAddPage() {
     description,
     start_bid,
     closed_at,
-    cover,
+    cover, 
   }) => {
     dispatch(
       asyncAddAuction(

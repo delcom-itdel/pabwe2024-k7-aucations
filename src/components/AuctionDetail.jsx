@@ -18,11 +18,7 @@ function AuctionDetail({ auction }) {
           >
             <div className="card title-card">
               <div style={{ padding: "10px", textAlign: "center" }}>
-                <h2 className="card-title title-spacing">
-                  {" "}
-                  {/* Kelas title-spacing */}
-                  {auction.title}
-                </h2>
+                <h2 className="card-title title-spacing">{auction.title}</h2>
               </div>
             </div>
 

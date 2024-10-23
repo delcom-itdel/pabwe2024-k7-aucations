@@ -86,7 +86,7 @@ function Navigation({
     <div>
       <nav className="navbar navbar-expand-lg" style={styles.navbar}>
         <div className="container-fluid">
-          {/* Icon button for Auctions */}
+          /* Icon button for Auctions */
           <div className="mx-4">
             <div className="dropdown">
               <button
