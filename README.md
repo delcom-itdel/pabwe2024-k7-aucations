@@ -9,6 +9,8 @@
 | 11S22004 | Pangeran Simamora  | DarkblueRizzler  |     
 
 
+![WhatsApp Image 2024-10-23 at 16 48 30_2b388fb4](https://github.com/user-attachments/assets/15a48a03-a85b-4ebc-b7aa-3943fe657054)
+
 
 ## Logs
 
