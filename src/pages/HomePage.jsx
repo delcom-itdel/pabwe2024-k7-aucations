@@ -28,7 +28,7 @@ function HomePage({ selectedAuctionType }) {
   return (
     <section style={{ padding: "2rem 0" }}>
       <div className="container">
-        /* Greeting Card*/
+        {/* Greeting Card*/}
         {authLogin && (
           <div
             className="card mb-4"
@@ -45,7 +45,7 @@ function HomePage({ selectedAuctionType }) {
               padding: "2rem",
             }}
           >
-            /* Left Image */
+            {/* Left Image */}
             <div
               style={{ flex: "1", display: "flex", justifyContent: "center" }}
             >
@@ -59,7 +59,7 @@ function HomePage({ selectedAuctionType }) {
                 }}
               />
             </div>
-            /* Greeting Text */
+            {/* Greeting Text */}
             <div style={{ flex: "3", textAlign: "center" }}>
               <h5
                 className="card-title"
@@ -100,7 +100,7 @@ function HomePage({ selectedAuctionType }) {
               </p>
             </div>
 
-            /* Right Image */
+            {/* Right Image */}
             <div
               style={{ flex: "1", display: "flex", justifyContent: "center" }}
             >
